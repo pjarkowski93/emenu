@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres
+    container_name: db
+    volumes:
+      - data-emenu:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=emenu
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  emenu:
+    build:
+      context: .
+    container_name: emenu
+    volumes:
+      - ./app:/app
+    command: >
+      bash -c "python manage.py migrate &&
+               python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - "8000:8000"
+    tty: true
+    restart: always
+    environment:
+      - DB_NAME=emenu
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_HOST=db
+      - DB_PORT=5432
+    depends_on:
+      - db
+
+volumes:
+  data-emenu:

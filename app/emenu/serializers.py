@@ -18,9 +18,9 @@ class DishSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class CreateMenuWithDishSerializer(serializers.ModelSerializer):
+class CreateMenuDishMapSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.MenuWithDish
+        model = models.MenuDishMap
         fields = "__all__"
 
 
@@ -38,3 +38,21 @@ class ReadMenuSerializer(serializers.Serializer):
     class Meta:
         model = models.Menu
         fields = ("uuid", "dishes")
+
+
+class ReadMenuDetailSerializer(serializers.Serializer):
+    uuid = serializers.UUIDField()
+    name = serializers.CharField()
+    created_at = serializers.DateTimeField()
+    updated_at = serializers.DateTimeField()
+    dishes = serializers.SerializerMethodField()
+
+    def get_dishes(self, instance):
+        dishes_uuids = instance.dishes.all().values_list("dish", flat=True)
+        return DishSerializer(
+            models.Dish.objects.filter(uuid__in=dishes_uuids), many=True
+        ).data
+
+    class Meta:
+        model = models.Menu
+        fields = "__all__"

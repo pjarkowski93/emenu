@@ -19,7 +19,7 @@ class Dish(models.Model):
     name = models.CharField(max_length=100, blank=False)
     description = models.TextField()
     price = MoneyField(max_digits=8, decimal_places=2, default_currency="PLN")
-    preparing_time = models.IntegerField(help_text="Preparing time in minutes")
+    preparing_time = models.PositiveIntegerField(help_text="Preparing time in minutes")
     is_vegetarian = models.BooleanField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -28,11 +28,11 @@ class Dish(models.Model):
         db_table = "dish"
 
 
-class MenuWithDish(models.Model):
+class MenuDishMap(models.Model):
     uuid = models.UUIDField(default=uuid4, primary_key=True)
     menu = models.ForeignKey(Menu, on_delete=models.CASCADE, related_name="dishes")
     dish = models.ForeignKey(Dish, on_delete=models.CASCADE, related_name="menu")
 
     class Meta:
-        db_table = "menu_with_dish"
+        db_table = "menu_dish_map"
         unique_together = ("menu", "dish")

@@ -1,4 +1,4 @@
-.PHONY: build run start stop clean makemigrations migrate bash lint
+.PHONY: build run start stop clean makemigrations migrate bash lint coverage createsuperuser
 
 build:
 	docker-compose build
@@ -26,4 +26,14 @@ bash:
 	docker-compose exec emenu bash
 
 lint:
-	black ./app && isort ./app && pflake8 ./app
+	docker-compose exec emenu black . && isort . && pflake8 .
+
+tests:
+	docker-compose exec emenu coverage run manage.py test .
+
+coverage:
+	docker-compose exec emenu coverage run manage.py test .
+	docker-compose exec emenu coverage report
+
+createsuperuser:
+	docker-compose exec emenu python manage.py createsuperuser

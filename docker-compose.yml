@@ -16,6 +16,7 @@ services:
     container_name: emenu
     volumes:
       - ./app:/app
+      - ./pyproject.toml:/app/pyproject.toml
     command: >
       bash -c "python manage.py migrate &&
                python manage.py runserver 0.0.0.0:8000"

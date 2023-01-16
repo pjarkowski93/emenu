@@ -11,7 +11,12 @@ router.register("menu", views.MenuViewSet, basename="menu")
 urlpatterns = [
     path(
         "add_dish_to_menu/",
-        views.AddDishToMenuViewSet.as_view(),
+        views.AddDishToMenuView.as_view(),
         name="add_dish_to_menu",
+    ),
+    path(
+        "add_dish_to_menu/<uuid:uuid>",
+        views.UpdateDestoryDishMenuView.as_view(),
+        name="update_destroy_dish_menu",
     ),
 ] + router.urls

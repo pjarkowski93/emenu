@@ -1,10 +1,38 @@
 [tool.coverage.run]
+source = ["."]
 branch = true
-source = ["app"]
+plugins = [
+    'django_coverage_plugin',
+]
+omit = [
+    "*/tests/*",
+    "*apps.py",
+    "*manage.py",
+    "*__init__.py",
+    "*/migrations/*",
+    "*asgi*",
+    "*wsgi*",
+    "*admin.py",
+    "*urls.py",
+    "*settings.py",
+]
 
 [tool.coverage.report]
 show_missing = true
+skip_covered = true
 fail_under = 90
+omit = [
+    "*/tests/*",
+    "*apps.py",
+    "*manage.py",
+    "*__init__.py",
+    "*/migrations/*",
+    "*asgi*",
+    "*wsgi*",
+    "*admin.py",
+    "*urls.py",
+    "*settings.py",
+]
 
 [tool.black]
 line-length = 88
@@ -26,7 +54,9 @@ exclude = '''
 
 [tool.isort]
 profile = "black"
-src_paths = ["app/**"]
+src_paths = ["."]
+multi_line_output = 3
+include_trailing_comma = true
 force_alphabetical_sort_within_sections = true
 skip_glob = [
   "**/venv/**",

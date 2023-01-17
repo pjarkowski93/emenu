@@ -1,4 +1,4 @@
-.PHONY: build run start stop clean makemigrations migrate bash lint coverage createsuperuser
+.PHONY: build run start stop clean makemigrations migrate bash lint coverage createsuperuser run_test_email_command load_data
 
 build:
 	docker-compose build
@@ -37,3 +37,12 @@ coverage:
 
 createsuperuser:
 	docker-compose exec emenu python manage.py createsuperuser
+
+run_test_email_command:
+	docker-compose exec emenu python manage.py send_email --email test@test.com
+
+load_data:
+	docker-compose exec emenu python manage.py loaddata app/fixtures/user.json
+	docker-compose exec emenu python manage.py loaddata emenu/fixtures/dish.json
+	docker-compose exec emenu python manage.py loaddata emenu/fixtures/menu.json
+	docker-compose exec emenu python manage.py loaddata emenu/fixtures/menu_dish_map.json

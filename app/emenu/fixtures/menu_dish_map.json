@@ -1,0 +1,50 @@
+[
+    {
+        "model": "emenu.menudishmap",
+        "pk": "1635c3f8-419b-4e80-bc31-83fbc1d3a939",
+        "fields": {
+            "menu": "a9ae6f32-975f-466b-bcbd-1af3ae20bb26",
+            "dish": "201d4282-7322-4f5b-9eed-baf2a0b1a528"
+        }
+    },
+    {
+        "model": "emenu.menudishmap",
+        "pk": "6820d508-ef54-4163-85ab-e903a9000158",
+        "fields": {
+            "menu": "5d4df79c-257f-4ad5-8476-0f416a351ee7",
+            "dish": "7404f73c-d83e-4fe3-bab5-1006296ffd92"
+        }
+    },
+    {
+        "model": "emenu.menudishmap",
+        "pk": "866dae36-153f-4330-80dd-4774d5c74e6e",
+        "fields": {
+            "menu": "141e958c-f8e8-409a-b6b3-64e773b65d80",
+            "dish": "fcb0b08b-c232-4798-bbf6-a4316a3e2acb"
+        }
+    },
+    {
+        "model": "emenu.menudishmap",
+        "pk": "8a439c59-3802-4d4a-9e4a-34e184f3baf4",
+        "fields": {
+            "menu": "a9ae6f32-975f-466b-bcbd-1af3ae20bb26",
+            "dish": "2ab415f1-04ff-4d56-ab63-0071a9bdb743"
+        }
+    },
+    {
+        "model": "emenu.menudishmap",
+        "pk": "aac2ef36-6bc7-4213-8c15-fd4ff0e07c96",
+        "fields": {
+            "menu": "5d4df79c-257f-4ad5-8476-0f416a351ee7",
+            "dish": "640b2857-847d-49d5-b093-c30cf7ef9ba9"
+        }
+    },
+    {
+        "model": "emenu.menudishmap",
+        "pk": "db523506-276d-4d02-a621-8aac3fa6714d",
+        "fields": {
+            "menu": "a9ae6f32-975f-466b-bcbd-1af3ae20bb26",
+            "dish": "6bbfe929-6dee-460c-8787-cef2485a3dce"
+        }
+    }
+]

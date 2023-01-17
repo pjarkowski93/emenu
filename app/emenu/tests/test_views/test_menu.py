@@ -1,9 +1,10 @@
 from uuid import uuid4
-from parameterized import parameterized
+
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
 from model_bakery import baker
+from parameterized import parameterized
 from rest_framework.test import APIClient
 
 from emenu.models import Dish, Menu, MenuDishMap

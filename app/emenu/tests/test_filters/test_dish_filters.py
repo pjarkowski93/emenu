@@ -1,10 +1,10 @@
-from uuid import UUID
-from urllib.parse import urlencode
 from datetime import datetime, timedelta
-from parameterized import param, parameterized
+from urllib.parse import urlencode
+
 from django.test import TestCase
 from django.urls import reverse
 from model_bakery import baker
+from parameterized import param, parameterized
 from rest_framework.test import APIClient
 
 from emenu.models import Dish

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework_simplejwt",
     "rest_framework_simplejwt.token_blacklist",
+    "django_crontab",
     "django_filters",
     "drf_yasg",
     "djmoney",
@@ -168,3 +169,16 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+EMAIL_BACKEND = "django.core.mail.backends.{}.EmailBackend".format(
+    os.environ.get("EMAIL_BACKEND_CHOICE", "console")
+)
+EMAIL_HOST = os.environ.get("EMAIL_HOST", "localhost")
+EMAIL_PORT = os.environ.get("EMAIL_PORT", 587)
+EMAIL_USE_TLS = True
+EMAIL_RETRIES = int(os.environ.get("EMAIL_RETRIES", 3))
+EMAIL_HOST_USER = os.environ["EMAIL_HOST_USER"]
+EMAIL_HOST_PASSWORD = os.environ["EMAIL_HOST_PASSWORD"]
+
+
+CRONJOBS = [("10 10 * * *", "emenu.tasks.send_dish_updates.send_dish_updates")]

@@ -1,0 +1,86 @@
+[
+    {
+        "model": "emenu.dish",
+        "pk": "201d4282-7322-4f5b-9eed-baf2a0b1a528",
+        "fields": {
+            "name": "super dish 5",
+            "description": "well cooked dish 5",
+            "price_currency": "PLN",
+            "price": "34.50",
+            "preparing_time": 45,
+            "is_vegetarian": false,
+            "created_at": "2023-01-17T18:12:27.491Z",
+            "updated_at": "2023-01-17T18:12:27.491Z"
+        }
+    },
+    {
+        "model": "emenu.dish",
+        "pk": "2ab415f1-04ff-4d56-ab63-0071a9bdb743",
+        "fields": {
+            "name": "super dish 3",
+            "description": "well cooked dish 3",
+            "price_currency": "PLN",
+            "price": "15.00",
+            "preparing_time": 25,
+            "is_vegetarian": true,
+            "created_at": "2023-01-17T18:11:44.807Z",
+            "updated_at": "2023-01-17T18:11:44.807Z"
+        }
+    },
+    {
+        "model": "emenu.dish",
+        "pk": "640b2857-847d-49d5-b093-c30cf7ef9ba9",
+        "fields": {
+            "name": "super dish 1",
+            "description": "well cooked dish 1",
+            "price_currency": "PLN",
+            "price": "20.00",
+            "preparing_time": 40,
+            "is_vegetarian": false,
+            "created_at": "2023-01-17T18:10:59.626Z",
+            "updated_at": "2023-01-17T18:10:59.626Z"
+        }
+    },
+    {
+        "model": "emenu.dish",
+        "pk": "6bbfe929-6dee-460c-8787-cef2485a3dce",
+        "fields": {
+            "name": "super dish 4",
+            "description": "well cooked dish 4",
+            "price_currency": "PLN",
+            "price": "50.00",
+            "preparing_time": 35,
+            "is_vegetarian": false,
+            "created_at": "2023-01-17T18:12:07.469Z",
+            "updated_at": "2023-01-17T18:12:07.469Z"
+        }
+    },
+    {
+        "model": "emenu.dish",
+        "pk": "7404f73c-d83e-4fe3-bab5-1006296ffd92",
+        "fields": {
+            "name": "super dish 6",
+            "description": "well cooked dish 6",
+            "price_currency": "PLN",
+            "price": "55.90",
+            "preparing_time": 35,
+            "is_vegetarian": true,
+            "created_at": "2023-01-17T18:13:06.628Z",
+            "updated_at": "2023-01-17T18:13:06.628Z"
+        }
+    },
+    {
+        "model": "emenu.dish",
+        "pk": "fcb0b08b-c232-4798-bbf6-a4316a3e2acb",
+        "fields": {
+            "name": "super dish 2",
+            "description": "well cooked dish 2",
+            "price_currency": "PLN",
+            "price": "30.00",
+            "preparing_time": 45,
+            "is_vegetarian": true,
+            "created_at": "2023-01-17T18:11:22.468Z",
+            "updated_at": "2023-01-17T18:11:22.468Z"
+        }
+    }
+]

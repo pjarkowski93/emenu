@@ -1,9 +1,7 @@
 [tool.coverage.run]
 source = ["."]
 branch = true
-plugins = [
-    'django_coverage_plugin',
-]
+
 omit = [
     "*/tests/*",
     "*apps.py",
@@ -19,7 +17,6 @@ omit = [
 
 [tool.coverage.report]
 show_missing = true
-skip_covered = true
 fail_under = 90
 omit = [
     "*/tests/*",

@@ -4,8 +4,9 @@
 * docker and docker-compose are installed:
     - [docker install](https://docs.docker.com/engine/install/)
     - [docker-compose install](https://docs.docker.com/compose/install/)
-* git is installed:
-    - [git install](https://github.com/git-guides/install-git)
+
+**NOTE**
+If you want to run the app on windows and use make commands you will have to install [choco](https://chocolatey.org/install) and next run the command `choco install make` to install `make` after the installation you will have to restart your computer.
 
 ### Makefile commands
 1. build - build docker image

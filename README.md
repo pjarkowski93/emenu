@@ -33,3 +33,6 @@ If you want to run the app on windows and use make commands you will have to ins
 ### Django crontab commands
 1. To show lunched crons use `docker-compose exec emenu python manage.py crontab show`
 2. To run manually the cron job use `docker-compose exec emenu python manage.py <id_from_previous_command>`
+
+### API documentation:
+- http://localhost:8000/schema

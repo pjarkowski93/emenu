@@ -19,7 +19,7 @@ def get_message() -> str:
     month = yesterday_datetime.month
     day = yesterday_datetime.day
     dish_data = Dish.objects.filter(
-        Q(created_at__year=year, created_at__month=month, created_at__day=day)
+        Q(created_at__lte=yesterday_datetime)
         | Q(updated_at__year=year, updated_at__month=month, updated_at__day=day)
     )
     message_data = DishSerializer(dish_data, many=True).data

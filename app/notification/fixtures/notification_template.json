@@ -1,0 +1,13 @@
+[
+    {
+        "model": "notification.notificationtemplate",
+        "pk": "8a3d3a2b-fa0b-466f-93a1-7c8bb653cf01",
+        "fields": {
+            "name": "Email message template",
+            "message_template": "<html>\r\n<body>\r\n{message}\r\n</body>\r\n</html>",
+            "type": "EMAIL",
+            "created_at": "2023-01-22T17:18:00.808Z",
+            "updated_at": "2023-01-22T17:18:00.808Z"
+        }
+    }
+]

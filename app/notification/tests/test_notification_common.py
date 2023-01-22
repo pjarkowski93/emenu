@@ -2,16 +2,16 @@ from unittest.mock import Mock, patch
 
 from django.test import TestCase
 
-from emenu.notifications.notification_common import get_message
+from notification.notification_common import get_email_data
 
-PATCHING_PATH = "emenu.notifications.notification_common"
+PATCHING_PATH = "notification.notification_common"
 
 
 class GetMessageTestCase(TestCase):
     @patch(f"{PATCHING_PATH}.Dish")
     @patch(f"{PATCHING_PATH}.DishSerializer")
-    def test_get_message(self, mock_DishSerializer, mock_Dish):
-        mock_Dish.objects.filter.return_value = []
+    def test_get_email_message(self, mock_DishSerializer, mock_Dish):
+        mock_Dish.get_notification_dishes.return_value = ["data"]
         serializer_data = [
             {
                 "name": "test_name1",
@@ -39,16 +39,16 @@ class GetMessageTestCase(TestCase):
         mock_serializer_data.data = serializer_data
         mock_DishSerializer.return_value = mock_serializer_data
 
-        message = get_message()
-        self.assertEqual(mock_Dish.objects.filter.call_count, 1)
-        mock_DishSerializer.assert_called_once_with([], many=True)
+        message = get_email_data()
+        mock_Dish.get_notification_dishes.assert_called_once_with()
+        mock_DishSerializer.assert_called_once_with(["data"], many=True)
         for data in serializer_data:
-            assert data["name"] in message
-            assert data["name"] in message
-            assert str(data["price"]) in message
-            assert data["description"] in message
-            assert str(data["preparing_time"]) in message
+            assert data["name"] in message["message"]
+            assert data["name"] in message["message"]
+            assert str(data["price"]) in message["message"]
+            assert data["description"] in message["message"]
+            assert str(data["preparing_time"]) in message["message"]
             if data["is_vegetarian"]:
-                assert "Is vegetarian" in message
+                assert "Is vegetarian" in message["message"]
             else:
-                assert "Is not vegetarian" in message
+                assert "Is not vegetarian" in message["message"]

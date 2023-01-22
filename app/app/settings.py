@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "drf_yasg",
     "djmoney",
     "emenu",
+    "notification",
 ]
 
 MIDDLEWARE = [
@@ -181,4 +182,11 @@ EMAIL_HOST_USER = os.environ["EMAIL_HOST_USER"]
 EMAIL_HOST_PASSWORD = os.environ["EMAIL_HOST_PASSWORD"]
 
 
-CRONJOBS = [("10 10 * * *", "emenu.tasks.send_dish_updates.send_dish_updates")]
+CRONJOBS = [("10 10 * * *", "notification.tasks.notifications.send_email")]
+
+CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL", "redis://localhost:6379")
+CELERY_RESULT_BACKEND = os.environ.get(
+    "CELERY_RESULT_BACKEND", "redis://localhost:6379"
+)
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60

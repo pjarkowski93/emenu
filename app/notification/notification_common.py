@@ -1,27 +1,20 @@
 from abc import ABC, abstractmethod
-from datetime import datetime, timedelta
-
-from django.db.models import Q
 
 from emenu.models import Dish
 from emenu.serializers import DishSerializer
+from notification.exceptions import LackOfMessageDataException
 
 
 class NotificationSender(ABC):
     @abstractmethod
-    def send(self, message: str, recipient_email: str) -> None:
+    def send(self, message: str, title: str, recipient_email: str) -> None:
         raise NotImplementedError
 
 
-def get_message() -> str:
-    yesterday_datetime = datetime.today() - timedelta(days=1)
-    year = yesterday_datetime.year
-    month = yesterday_datetime.month
-    day = yesterday_datetime.day
-    dish_data = Dish.objects.filter(
-        Q(created_at__year=year, created_at__month=month, created_at__day=day)
-        | Q(updated_at__year=year, updated_at__month=month, updated_at__day=day)
-    )
+def get_email_data() -> dict:
+    dish_data = Dish.get_notification_dishes()
+    if not dish_data:
+        raise LackOfMessageDataException("Nothing to send.")
     message_data = DishSerializer(dish_data, many=True).data
 
     html_message = (
@@ -36,4 +29,4 @@ def get_message() -> str:
         for data in message_data
     )
 
-    return "".join(html_message)
+    return {"message": "".join(html_message)}

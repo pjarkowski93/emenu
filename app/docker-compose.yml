@@ -1,6 +1,12 @@
 version: "3.9"
 
 services:
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - 6379:6379
+
   db:
     image: postgres
     container_name: db
@@ -10,17 +16,14 @@ services:
       - 5432:5432
     env_file:
       - .env
+
   emenu:
     build:
       context: .
     container_name: emenu
+    entrypoint: scripts/app.sh
     volumes:
-      - ./app:/app
-      - ./pyproject.toml:/app/pyproject.toml
-    command: >
-      bash -c "python manage.py crontab add &&
-               python manage.py migrate &&
-               python manage.py runserver 0.0.0.0:8000"
+      - .:/app
     ports:
       - "8000:8000"
     tty: true
@@ -29,6 +32,20 @@ services:
       - .env
     depends_on:
       - db
+
+  celery:
+    build:
+      context: .
+    container_name: celery
+    restart: always
+    entrypoint: scripts/worker.sh
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    depends_on:
+      - redis
+      - emenu
 
 volumes:
   data-emenu:

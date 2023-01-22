@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from uuid import uuid4
 
 from django.db import models
@@ -26,6 +27,21 @@ class Dish(models.Model):
 
     class Meta:
         db_table = "dish"
+
+    @staticmethod
+    def get_notification_dishes() -> models.QuerySet:
+        yesterday_datetime = datetime.today() - timedelta(days=1)
+        year = yesterday_datetime.year
+        month = yesterday_datetime.month
+        day = yesterday_datetime.day
+        return Dish.objects.filter(
+            models.Q(
+                created_at__year=year, created_at__month=month, created_at__day=day
+            )
+            | models.Q(
+                updated_at__year=year, updated_at__month=month, updated_at__day=day
+            )
+        )
 
 
 class MenuDishMap(models.Model):

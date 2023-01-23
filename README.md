@@ -20,7 +20,8 @@ If you want to run the app on windows and use make commands you will have to ins
 10. coverage - run unit tests and report test coverage
 11. createsuperuser - run `createsuperuser` command
 12. run_test_send_email - run commnd to test sending emails
-13. load_data - load test data
+13. run_create_dish_email_notification - run command to create notifications for updated or created dishes
+14. load_data - load test data
 
 ### Run application
 1. Copy `example_env.env` data, create `.env` in the same place as `example_env.env` file and paste data from `example_env.env` file to new `.env` file

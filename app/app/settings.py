@@ -182,7 +182,11 @@ EMAIL_HOST_USER = os.environ["EMAIL_HOST_USER"]
 EMAIL_HOST_PASSWORD = os.environ["EMAIL_HOST_PASSWORD"]
 
 
-CRONJOBS = [("10 10 * * *", "notification.tasks.notifications.send_email")]
+CRONJOBS = [
+    ("10 10 * * *", "notification.utils.send_notification"),
+    ("8 8 * * *", "notification.utils.create_update_dish_notification"),
+]
+
 
 CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL", "redis://localhost:6379")
 CELERY_RESULT_BACKEND = os.environ.get(

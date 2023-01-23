@@ -2,7 +2,6 @@ from abc import ABC, abstractmethod
 
 from emenu.models import Dish
 from emenu.serializers import DishSerializer
-from notification.exceptions import LackOfMessageDataException
 
 
 class NotificationSender(ABC):
@@ -13,8 +12,6 @@ class NotificationSender(ABC):
 
 def get_email_data() -> dict:
     dish_data = Dish.get_notification_dishes()
-    if not dish_data:
-        raise LackOfMessageDataException("Nothing to send.")
     message_data = DishSerializer(dish_data, many=True).data
 
     html_message = (

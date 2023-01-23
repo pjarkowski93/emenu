@@ -1,4 +1,4 @@
-.PHONY: build run start stop clean migrate bash lint coverage createsuperuser run_test_send_email load_data
+.PHONY: build run start stop clean migrate bash lint coverage createsuperuser run_test_send_email run_create_dish_email_notification load_data
 
 docker_emenu := docker-compose exec emenu
 manage_py := python manage.py
@@ -40,6 +40,9 @@ createsuperuser:
 
 run_test_send_email:
 	$(docker_emenu) $(manage_py) send_email
+
+run_create_dish_email_notification:
+	$(docker_emenu) $(manage_py) create_dish_email_notification
 
 load_data:
 	$(docker_emenu) $(manage_py) loaddata app/fixtures/user.json

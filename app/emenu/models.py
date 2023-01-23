@@ -1,8 +1,13 @@
+import logging
 from datetime import datetime, timedelta
 from uuid import uuid4
 
 from django.db import models
 from djmoney.models.fields import MoneyField
+
+from notification.exceptions import LackOfMessageDataException
+
+logger = logging.getLogger(__name__)
 
 
 class Menu(models.Model):
@@ -29,11 +34,31 @@ class Dish(models.Model):
         db_table = "dish"
 
     @staticmethod
-    def get_notification_dishes() -> models.QuerySet:
+    def _get_year_month_yesterday() -> tuple[int, int, int]:
         yesterday_datetime = datetime.today() - timedelta(days=1)
         year = yesterday_datetime.year
         month = yesterday_datetime.month
         day = yesterday_datetime.day
+        return year, month, day
+
+    @staticmethod
+    def is_data_to_send() -> bool:
+        year, month, day = Dish._get_year_month_yesterday()
+        return Dish.objects.filter(
+            models.Q(
+                created_at__year=year, created_at__month=month, created_at__day=day
+            )
+            | models.Q(
+                updated_at__year=year, updated_at__month=month, updated_at__day=day
+            )
+        ).exists()
+
+    @staticmethod
+    def get_notification_dishes() -> models.QuerySet:
+        if not Dish.is_data_to_send():
+            logger.info("Nothing to send.")
+            raise LackOfMessageDataException("Nothing to send.")
+        year, month, day = Dish._get_year_month_yesterday()
         return Dish.objects.filter(
             models.Q(
                 created_at__year=year, created_at__month=month, created_at__day=day
